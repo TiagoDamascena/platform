@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Orchid\Screen\Contents;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
+use Orchid\Screen\Repository;
+use Orchid\Screen\Layouts\Base;
 use Orchid\Access\UserInterface;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
+use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Contracts\ActionContract;
-use Orchid\Screen\Layouts\Base;
-use Orchid\Screen\Repository;
 
 /**
- * Class CardContent
+ * Class CardContent.
  */
 class CardContent extends Base
 {
@@ -71,7 +71,7 @@ class CardContent extends Base
         return [
             Auth::user(),
             Auth::user(),
-            Auth::user()
+            Auth::user(),
         ];
     }
 
@@ -139,7 +139,7 @@ class CardContent extends Base
         $users = Arr::wrap($this->users());
 
         return collect($users)->map(function (UserInterface $user) {
-           return [
+            return [
                'avatar' => $user->getAvatar(),
                'name'   => $user->getNameTitle(),
                'sub'    => $user->getSubTitle(),
