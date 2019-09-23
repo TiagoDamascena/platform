@@ -26,7 +26,7 @@
                     </div>
                     <div class="modal-body">
                         <div data-async>
-                            @foreach($manyForms as $key => $modal)
+                            @foreach($manyForms as $formKey => $modal)
                                 @foreach($modal as $item)
                                     {!! $item ?? '' !!}
                                 @endforeach
