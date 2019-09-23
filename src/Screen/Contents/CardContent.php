@@ -26,7 +26,7 @@ class CardContent extends Base
     /**
      * @var string
      */
-    protected $template = 'cards';
+    protected $template = 'platform::contents.card';
 
     /**
      * @return string|null
