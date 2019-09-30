@@ -8,8 +8,10 @@ use Orchid\Screen\Fields\UTM;
 use Orchid\Screen\Fields\Code;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\Radio;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Platform\Models\Role;
+use Orchid\Screen\Fields\Matrix;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Fields\Cropper;
@@ -168,6 +170,22 @@ class RowExample extends Rows
             Relation::make('role')
                 ->fromModel(Role::class, 'name')
                 ->title('Select one role'),
+
+            Radio::make('radio')
+                ->placeholder('Yes')
+                ->value(1)
+                ->title('Radio'),
+
+            Radio::make('radio')
+                ->placeholder('No')
+                ->value(0),
+
+            Matrix::make('matrix')
+                ->columns([
+                    'Attribute',
+                    'Value',
+                    'Units',
+                ]),
 
         ];
     }
