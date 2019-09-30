@@ -3,7 +3,8 @@
 @section('body-left')
 
 
-    <div class="d-sm-flex d-md-block wrapper mt-md-4 w-full v-center">
+    <div class="d-sm-flex d-md-block wrapper mt-md-4 w-full v-center"
+         style="border-bottom: 1px solid rgba(233, 236, 239, 0.05);">
         <a href="#" class="header-toggler d-md-none mr-auto order-first"
            data-toggle="collapse"
            data-target="#headerMenuCollapse">
@@ -19,7 +20,6 @@
     <nav class="collapse d-md-block w-full" id="headerMenuCollapse">
 
         @include('platform::partials.search')
-
         @includeWhen(Auth::check(), 'platform::partials.profile')
 
         <ul class="nav flex-column m-b">
@@ -44,7 +44,7 @@
 
 
 @section('body-right')
-    <div class="wrapper mt-4">
+    <div class="wrapper mt-md-4 bg-white">
         <div class="v-md-center">
             <div class="d-none d-md-block col-xs-12 col-md-4 no-padder">
                 <h1 class="m-n font-thin h3 text-black">@yield('title')</h1>
@@ -60,7 +60,7 @@
         {{ Breadcrumbs::view('platform::partials.breadcrumbs') }}
     @endif
 
-    <div class="d-flex">
+    <div class="d-flex bg-white mb-4">
         <div class="app-content-body" id="app-content-body">
             @include('platform::partials.alert')
             @yield('content')

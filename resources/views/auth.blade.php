@@ -14,10 +14,10 @@
 
 @section('body-right')
 
-    <div class="v-center h-100 w-100 justify-content-center">
+    <div class="v-center h-100 w-100 justify-content-center min-vh-100">
         <div class="container">
             <div class="row">
-                <div class="col mx-auto p-5" style="max-width: 30rem;">
+                <div class="col mx-auto p-5 bg-white" style="max-width: 30rem;">
                     @yield('content')
                 </div>
             </div>

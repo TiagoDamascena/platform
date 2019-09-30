@@ -65,6 +65,8 @@ $brand-grey : $oc-gray-7;
 $brand-white : #ffffff;
 $brand-black : #1c2b36;
 
+// #535c69
+
 $primary:       $orchid-color;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
@@ -72,7 +74,7 @@ $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
-$dark:          #212529 !default;
+$dark:          #535c69 !default;
 
 $brand-grey-light : mix($brand-grey, #ffffff, 10%);
 
@@ -200,3 +202,6 @@ $state-warning-text : #8a6d3b;
 $state-danger-text : #a94442;
 $state-success-text : #3c763d;
 
+
+$body-bg: #eef2f4;
+$breadcrumb-bg: $body-bg;
