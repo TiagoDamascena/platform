@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "lib": ["dom"],
+        "target": "es5",
+        "baseUrl": "./resources/js",
+        "paths": {
+            "orchid/*": ["*"]
+        }
+    },
+    "include": [
+        "resources/js/declarations.d.ts",
+        "resources/js/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "vendor"
+    ],
+    "compileOnSave": false
+}

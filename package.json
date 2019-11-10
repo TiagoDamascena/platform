@@ -8,9 +8,11 @@
     "eslint": "./node_modules/.bin/eslint resources/js/ --fix"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-transform-block-scoping": "^7.6.3",
-    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-env": "^7.7.1",
+    "@types/bootstrap": "^4.3.1",
+    "@types/jquery": "^3.3.31",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
     "codeflask": "^1.4.0",
@@ -24,10 +26,10 @@
     "imports-loader": "^0.8.0",
     "inputmask": "^4.0.9",
     "jquery": "^3.4.1",
-    "laravel-mix": "^4.1.4",
+    "laravel-mix": "^5.0",
     "leaflet": "^1.3.4",
     "lodash": "^4.17.15",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "open-color": "^1.7.0",
     "orchid-icons": "^1.0.10",
     "popper.js": "^1.16.0",
@@ -42,11 +44,14 @@
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
+    "@types/node": "^12.12.7",
     "eslint": "^5.15.2",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
     "resolve-url-loader": "^3.1.0",
     "sass-loader": "^7.3.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
     "vue-template-compiler": "^2.6.9"
   }
 }

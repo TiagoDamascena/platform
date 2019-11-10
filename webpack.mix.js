@@ -43,7 +43,7 @@ mix
     .options({
         processCssUrls: false
     })
-    .js('resources/js/app.js', 'js/orchid.js')
+    .ts('resources/js/app.ts', 'js/orchid.js')
     .extract([
         'stimulus', 'turbolinks', 'stimulus/webpack-helpers',
         'jquery', 'popper.js', 'bootstrap',
