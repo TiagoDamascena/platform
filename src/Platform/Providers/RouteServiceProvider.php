@@ -25,7 +25,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->binding();
 
-        require Dashboard::path('routes/breadcrumbs.php');
+        require_once Dashboard::path('routes/breadcrumbs.php');
 
         parent::boot();
     }
@@ -85,15 +85,5 @@ class RouteServiceProvider extends ServiceProvider
             ->as('platform.')
             ->middleware(config('platform.middleware.private'))
             ->group(Dashboard::path('routes/systems.php'));
-
-        /*
-         * Application
-         */
-        if (file_exists(base_path('routes/platform.php'))) {
-            Route::domain((string) config('platform.domain'))
-                ->prefix(Dashboard::prefix('/'))
-                ->middleware(config('platform.middleware.private'))
-                ->group(base_path('routes/platform.php'));
-        }
     }
 }

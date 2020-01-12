@@ -6,6 +6,7 @@ namespace Orchid\Tests;
 
 use Faker\Factory as Faker;
 use Faker\Generator;
+use Illuminate\Foundation\Application;
 use Orchestra\Testbench\Dusk\Options;
 use Orchestra\Testbench\Dusk\TestCase;
 use Orchid\Platform\Models\User;
@@ -50,9 +51,9 @@ abstract class TestBrowserCase extends TestCase
     /**
      * Define environment setup.
      *
-     * @param \Illuminate\Foundation\Application $app
+     * @param Application $app
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp(Application $app)
     {
         $this->getEnvSetUp($app);
         config()->set('database.connections.orchid', [
@@ -67,7 +68,7 @@ abstract class TestBrowserCase extends TestCase
     /**
      * @return User
      */
-    protected function createAdminUser()
+    protected function createAdminUser(): User
     {
         if (is_null($this->user)) {
             $this->user = factory(User::class)->create();
@@ -79,7 +80,7 @@ abstract class TestBrowserCase extends TestCase
     /**
      * @return Generator
      */
-    protected function faker()
+    protected function faker(): Generator
     {
         return $this->faker;
     }

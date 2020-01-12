@@ -20,7 +20,7 @@ class RoleTest extends TestFeatureCase
         $this->role = factory(Role::class)->create();
     }
 
-    public function testRouteSystemsRoles()
+    public function testRouteSystemsRoles(): void
     {
         $response = $this
             ->actingAs($this->createAdminUser())
@@ -32,7 +32,7 @@ class RoleTest extends TestFeatureCase
             ->assertSee($this->role->slug);
     }
 
-    public function testRouteSystemsRolesCreate()
+    public function testRouteSystemsRolesCreate(): void
     {
         $response = $this->actingAs($this->createAdminUser())
             ->get(route('platform.systems.roles.create'));
@@ -42,15 +42,15 @@ class RoleTest extends TestFeatureCase
             ->assertSee('field-roles');
     }
 
-    public function testRouteSystemsRolesEdit()
+    public function testRouteSystemsRolesEdit(): void
     {
         $response = $this
             ->actingAs($this->createAdminUser())
             ->get(route('platform.systems.roles.edit', $this->role->slug));
 
         $response->assertOk()
-        ->assertSee('field-roles')
-        ->assertSee($this->role->name)
-        ->assertSee($this->role->slug);
+            ->assertSee('field-roles')
+            ->assertSee($this->role->name)
+            ->assertSee($this->role->slug);
     }
 }

@@ -54,10 +54,18 @@ class FoundationServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->runningInConsole()) {
+            $this
+                ->registerOrchid()
+                ->registerAssets()
+                ->registerDatabase();
+        }
         $this
+            /*
             ->registerOrchid()
             ->registerAssets()
             ->registerDatabase()
+            */
             ->registerConfig()
             ->registerTranslations()
             ->registerBlade()
@@ -102,10 +110,11 @@ class FoundationServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): self
     {
+        /*
         $this->publishes([
             Dashboard::path('config/platform.php') => config_path('platform.php'),
         ], 'config');
-
+*/
         return $this;
     }
 
@@ -117,8 +126,10 @@ class FoundationServiceProvider extends ServiceProvider
     protected function registerOrchid(): self
     {
         $this->publishes([
-            Dashboard::path('install-stubs/routes/') => base_path('routes'),
-            Dashboard::path('install-stubs/Orchid/') => app_path('Orchid'),
+            Dashboard::path('install-stubs/routes/')                   => base_path('routes'),
+            Dashboard::path('install-stubs/Orchid/')                   => app_path('Orchid'),
+            Dashboard::path('install-stubs/OrchidServiceProvider.php') => app_path('Providers/OrchidServiceProvider.php'),
+            Dashboard::path('install-stubs/User.php')                  => app_path('/User.php'),
         ], 'orchid-stubs');
 
         return $this;
@@ -229,26 +240,21 @@ class FoundationServiceProvider extends ServiceProvider
             return new Dashboard();
         });
 
-        if (! Route::hasMacro('screen')) {
+        if (!Route::hasMacro('screen')) {
             Route::macro('screen', function ($url, $screen, $name = null) {
                 /* @var Router $this */
-                return $this->any($url.'/{method?}/{argument?}', [$screen, 'handle'])
+                return $this->any($url . '/{method?}/{argument?}', [$screen, 'handle'])
                     ->name($name);
             });
         }
 
-        if (! defined('PLATFORM_PATH')) {
-            /*
-             * @deprecated
-             *
-             * Get the path to the ORCHID Platform folder.
-             */
-            define('PLATFORM_PATH', Dashboard::path());
+        /*
+        if (! $this->app->configurationIsCached()) {
+            $this->mergeConfigFrom(
+                Dashboard::path('config/platform.php'), 'platform'
+            );
         }
-
-        $this->mergeConfigFrom(
-            Dashboard::path('config/platform.php'), 'platform'
-        );
+        */
 
         /*
          * Adds Orchid source preset to Laravel's default preset command.

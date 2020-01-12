@@ -13,7 +13,7 @@ use Orchid\Tests\TestUnitCase;
  */
 class MenuTest extends TestUnitCase
 {
-    public function testIsMenu()
+    public function testIsMenu(): void
     {
         $menu = (new Dashboard())->menu;
 
@@ -38,7 +38,7 @@ class MenuTest extends TestUnitCase
         $this->assertEquals(! is_null($menu->render('Test')), true);
     }
 
-    public function testCountLocation()
+    public function testCountLocation(): void
     {
         $menu = (new Dashboard())->menu;
 
@@ -61,7 +61,7 @@ class MenuTest extends TestUnitCase
         $this->assertEquals(2, $count);
     }
 
-    public function testCanSee()
+    public function testCanSee(): void
     {
         $menu = (new Dashboard())->menu;
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Orchid\Platform\Providers;
 
-use App\Orchid\PlatformProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Platform\Dashboard;
@@ -42,6 +41,17 @@ class PlatformServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register provider.
+     */
+    public function register()
+    {
+        if (class_exists(\App\Providers\OrchidServiceProvider::class)) {
+            //$this->app->register(\App\Providers\OrchidServiceProvider::class);
+        }
+    }
+
+
+    /**
      * @return ItemPermission
      */
     protected function registerPermissionsMain(): ItemPermission
@@ -58,15 +68,5 @@ class PlatformServiceProvider extends ServiceProvider
     {
         return ItemPermission::group(__('Systems'))
             ->addPermission('platform.systems.attachment', __('Attachment'));
-    }
-
-    /**
-     * Register provider.
-     */
-    public function register()
-    {
-        if (class_exists(PlatformProvider::class)) {
-            $this->app->register(PlatformProvider::class);
-        }
     }
 }

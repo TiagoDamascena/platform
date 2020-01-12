@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Tests\Exemplar\App\Screens\ModalScreen;
 use Orchid\Tests\TestUnitCase;
+use Throwable;
 
 /**
  * Class ModalTest.
@@ -15,9 +16,9 @@ use Orchid\Tests\TestUnitCase;
 class ModalTest extends TestUnitCase
 {
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function testModalScreenRender()
+    public function testModalScreenRender(): void
     {
         $screen = new ModalScreen();
         $html = $screen->view()->withErrors(Validator::make([], []))->render();

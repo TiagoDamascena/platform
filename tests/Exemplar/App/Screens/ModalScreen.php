@@ -9,6 +9,7 @@ use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Screen;
+use Throwable;
 
 class ModalScreen extends Screen
 {
@@ -56,9 +57,9 @@ class ModalScreen extends Screen
     /**
      * Views.
      *
-     * @throws \Throwable
-     *
      * @return array
+     * @throws Throwable
+     *
      */
     public function layout(): array
     {

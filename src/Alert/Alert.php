@@ -13,26 +13,6 @@ use Orchid\Support\Color;
 class Alert
 {
     /**
-     * @deprecated
-     */
-    public const INFO = 'info';
-
-    /**
-     * @deprecated
-     */
-    public const SUCCESS = 'success';
-
-    /**
-     * @deprecated
-     */
-    public const ERROR = 'danger';
-
-    /**
-     * @deprecated
-     */
-    public const WARNING = 'warning';
-
-    /**
      * @var string
      */
     public const SESSION_MESSAGE = 'flash_notification.message';

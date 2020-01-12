@@ -12,7 +12,7 @@ use Orchid\Tests\Unit\Screen\TestFieldsUnitCase;
  */
 class ButtonTest extends TestFieldsUnitCase
 {
-    public function testButtonInstance()
+    public function testButtonInstance(): void
     {
         $button = Button::make('About')
             ->method('test');
@@ -24,7 +24,7 @@ class ButtonTest extends TestFieldsUnitCase
         );
     }
 
-    public function testButtonParams()
+    public function testButtonParams(): void
     {
         $button = Button::make('About')
             ->method('test')
@@ -40,7 +40,7 @@ class ButtonTest extends TestFieldsUnitCase
         );
     }
 
-    public function testButtonTitle()
+    public function testButtonTitle(): void
     {
         $button = Button::make('About')
             ->method('test')
@@ -54,7 +54,7 @@ class ButtonTest extends TestFieldsUnitCase
         );
     }
 
-    public function testButtonDisableTurbolinks()
+    public function testButtonDisableTurbolinks(): void
     {
         $button = Button::make('About')
             ->method('test')
@@ -68,7 +68,7 @@ class ButtonTest extends TestFieldsUnitCase
         );
     }
 
-    public function testButtonEnabledTurbolinks()
+    public function testButtonEnabledTurbolinks(): void
     {
         $button = Button::make('About')
             ->method('test')

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Orchid\Tests\Unit;
 
+use Exception;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\Models\Role;
@@ -18,7 +19,7 @@ class PermissionTest extends TestUnitCase
     /**
      * Verify permissions.
      */
-    public function testIsPermission()
+    public function testIsPermission(): void
     {
         $user = $this->createUser();
 
@@ -79,7 +80,7 @@ class PermissionTest extends TestUnitCase
     /**
      * Dashboard registered permission.
      */
-    public function testIsRegisteredPermission()
+    public function testIsRegisteredPermission(): void
     {
         $dashboard = new Dashboard();
 
@@ -91,7 +92,7 @@ class PermissionTest extends TestUnitCase
         $this->assertEquals($dashboard->getPermission()->count(), 1);
     }
 
-    public function testReplasePermission()
+    public function testReplasePermission(): void
     {
         $user = $this->createUser();
 
@@ -101,9 +102,9 @@ class PermissionTest extends TestUnitCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public function testDeleteUser()
+    public function testDeleteUser(): void
     {
         $user = $this->createUser();
         $role = $this->createRole();
@@ -121,7 +122,7 @@ class PermissionTest extends TestUnitCase
         $this->assertTrue($user->delete());
     }
 
-    public function testDeleteRole()
+    public function testDeleteRole(): void
     {
         $user = $this->createUser();
         $role = $this->createRole();

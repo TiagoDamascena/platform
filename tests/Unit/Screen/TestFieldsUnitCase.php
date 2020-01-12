@@ -7,6 +7,7 @@ namespace Orchid\Tests\Unit\Screen;
 use Illuminate\Support\Facades\Validator;
 use Orchid\Screen\Field;
 use Orchid\Tests\TestUnitCase;
+use Throwable;
 
 /**
  * Class TestFieldsUnitCase.
@@ -14,11 +15,11 @@ use Orchid\Tests\TestUnitCase;
 class TestFieldsUnitCase extends TestUnitCase
 {
     /**
-     * @param \Orchid\Screen\Field $field
-     * @param array                $data
-     * @param array                $rules
-     * @param array                $messages
-     * @param array                $customAttributes
+     * @param Field $field
+     * @param array $data
+     * @param array $rules
+     * @param array $messages
+     * @param array $customAttributes
      *
      * @return string
      */
@@ -28,7 +29,7 @@ class TestFieldsUnitCase extends TestUnitCase
             $validator = Validator::make($data, $rules, $messages, $customAttributes);
 
             return $field->render()->withErrors($validator)->render();
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             die($throwable->getMessage());
         }
     }
@@ -60,11 +61,11 @@ class TestFieldsUnitCase extends TestUnitCase
     }
 
     /**
-     * @param \Orchid\Screen\Field $field
-     * @param array                $data
-     * @param array                $rules
-     * @param array                $messages
-     * @param array                $customAttributes
+     * @param Field $field
+     * @param array $data
+     * @param array $rules
+     * @param array $messages
+     * @param array $customAttributes
      *
      * @return string
      */

@@ -14,19 +14,19 @@ use Orchid\Tests\Unit\Screen\TestFieldsUnitCase;
  */
 class CropperTest extends TestFieldsUnitCase
 {
-    public function testInstance()
+    public function testInstance(): void
     {
         $picture = Cropper::make('picture')
-                ->width(1920)
-                ->height(1020)
-                ->value('https://example.com/img.jpg');
+            ->width(1920)
+            ->height(1020)
+            ->value('https://example.com/img.jpg');
 
         $view = self::renderField($picture);
 
         $this->assertStringContainsString('https://example.com/img.jpg', $view);
     }
 
-    public function testValueTargetId()
+    public function testValueTargetId(): void
     {
         $file = UploadedFile::fake()->create('document.jpg', 200);
         $attachment = new File($file);

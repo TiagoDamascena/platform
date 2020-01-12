@@ -7,6 +7,8 @@ namespace Orchid\Tests;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsManager;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+use Illuminate\Config\Repository;
+use Illuminate\Foundation\Application;
 use Orchid\Database\Seeds\OrchidDatabaseSeeder;
 use Orchid\Platform\Models\User;
 use Orchid\Platform\Providers\FoundationServiceProvider;
@@ -29,9 +31,9 @@ trait Environment
     {
         parent::setUp();
 
-        $this->loadLaravelMigrations();
-        $this->loadMigrationsFrom(realpath('./database/migrations'));
-        $this->artisan('migrate', ['--database' => 'orchid']);
+        $this->artisan('orchid:install');
+
+        $this->loadMigrations();
 
         $this->withFactories(Dashboard::path('database/factories'));
 
@@ -47,11 +49,12 @@ trait Environment
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param Application $app
      */
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
-        $config = config();
+        /** @var Repository $config */
+        $config = $app['config'];
 
         $config->set('app.debug', true);
         $config->set('auth.providers.users.model', User::class);
@@ -77,11 +80,9 @@ trait Environment
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
-     *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders(): array
     {
         return [
             FoundationServiceProvider::class,
@@ -90,11 +91,9 @@ trait Environment
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
-     *
      * @return array
      */
-    protected function getPackageAliases($app)
+    protected function getPackageAliases(): array
     {
         return [
             'Alert'       => Alert::class,
@@ -102,5 +101,21 @@ trait Environment
             'Breadcrumbs' => Breadcrumbs::class,
             'Dashboard'   => Dashboard::class,
         ];
+    }
+
+    /**
+     * Load the migrations for the test environment.
+     *
+     * @return void
+     */
+    protected function loadMigrations(): void
+    {
+        $this->loadLaravelMigrations();
+        $this->loadMigrationsFrom([
+            '--database' => 'sqlite',
+            '--realpath' => realpath('./database/migrations'),
+        ]);
+
+        $this->artisan('migrate', ['--database' => 'orchid']);
     }
 }

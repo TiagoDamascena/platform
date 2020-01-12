@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Orchid\Tests\Unit;
 
+use Generator;
 use Illuminate\Contracts\View\View;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
@@ -23,6 +24,7 @@ use Orchid\Screen\Fields\TinyMCE;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Fields\UTM;
 use Orchid\Tests\TestUnitCase;
+use Throwable;
 
 /**
  * Class FieldTest.
@@ -30,9 +32,9 @@ use Orchid\Tests\TestUnitCase;
 class FieldTest extends TestUnitCase
 {
     /**
-     * @return \Generator
+     * @return Generator
      */
-    public function exampleFields()
+    public function exampleFields(): ?\Generator
     {
         yield [Input::class, [
             'name' => 'example',
@@ -109,11 +111,11 @@ class FieldTest extends TestUnitCase
      *
      * @dataProvider exampleFields
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function testHasCorrectInstance(string $field, $options)
+    public function testHasCorrectInstance(string $field, $options): void
     {
-        /** @var \Orchid\Screen\Field $field */
+        /** @var Field $field */
         $field = $field::make();
 
         foreach ($options as $key => $option) {
@@ -126,7 +128,7 @@ class FieldTest extends TestUnitCase
         $this->assertStringContainsString('example', $view->withErrors([])->render());
     }
 
-    public function testUniqueId()
+    public function testUniqueId(): void
     {
         $collect = collect(range(0, 10000));
 

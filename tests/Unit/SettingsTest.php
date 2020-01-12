@@ -7,6 +7,7 @@ namespace Orchid\Tests\Unit;
 use Illuminate\Support\Str;
 use Orchid\Setting\Setting;
 use Orchid\Tests\TestUnitCase;
+use stdClass;
 
 class SettingsTest extends TestUnitCase
 {
@@ -17,11 +18,11 @@ class SettingsTest extends TestUnitCase
      */
     public $setting;
 
-    public function testForOneValue()
+    public function testForOneValue(): void
     {
         //Запишем значение
-        $key = 'test-'.Str::random(40);
-        $value = 'value-'.Str::random(40);
+        $key = 'test-' . Str::random(40);
+        $value = 'value-' . Str::random(40);
 
         $this->setting->set($key, $value);
 
@@ -38,12 +39,12 @@ class SettingsTest extends TestUnitCase
         $this->assertEquals(null, $result);
     }
 
-    public function testForManyValue()
+    public function testForManyValue(): void
     {
         $valueArray = [
-            'test-1' => 'value-'.Str::random(40),
-            'test-2' => 'value-'.Str::random(40),
-            'test-3' => 'value-'.Str::random(40),
+            'test-1' => 'value-' . Str::random(40),
+            'test-2' => 'value-' . Str::random(40),
+            'test-3' => 'value-' . Str::random(40),
         ];
 
         //Добавим несколько значений
@@ -69,7 +70,7 @@ class SettingsTest extends TestUnitCase
         $this->assertEquals(3, $result);
     }
 
-    public function testForRewriteCache()
+    public function testForRewriteCache(): void
     {
         $this->setting->set('cache-key', 'old');
         $this->setting->get('cache-key');
@@ -83,7 +84,7 @@ class SettingsTest extends TestUnitCase
      *
      * @param $defaultValue
      */
-    public function testDefaultValue($defaultValue)
+    public function testDefaultValue($defaultValue): void
     {
         $value = $this->setting->get('nonexistent value', $defaultValue);
 
@@ -99,12 +100,12 @@ class SettingsTest extends TestUnitCase
         return [
             ['string'],
             [123],
-            [new \stdClass()],
+            [new stdClass()],
             [['test', 123]],
         ];
     }
 
-    public function testUseHelper()
+    public function testUseHelper(): void
     {
         $this->setting->set('helper', 'run');
 

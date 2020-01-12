@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Orchid\Tests\Feature\Platform;
 
+use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Http\UploadedFile;
 use Orchid\Attachment\Models\Attachment;
 use Orchid\Tests\TestFeatureCase;
 
 class AttachmentTest extends TestFeatureCase
 {
-    public function testAttachmentHttpUpload()
+    public function testAttachmentHttpUpload(): void
     {
         $response = $this
             ->actingAs($this->createAdminUser())
@@ -27,7 +28,7 @@ class AttachmentTest extends TestFeatureCase
             ]);
     }
 
-    public function testAttachmentHttpMultiUpload()
+    public function testAttachmentHttpMultiUpload(): void
     {
         $response = $this
             ->actingAs($this->createAdminUser())
@@ -50,16 +51,16 @@ class AttachmentTest extends TestFeatureCase
             ]);
     }
 
-    public function testAttachmentHttpDestroy()
+    public function testAttachmentHttpDestroy(): void
     {
-        /** @var $response \Illuminate\Foundation\Testing\TestResponse */
+        /** @var $response TestResponse */
         $response = $this
             ->actingAs($this->createAdminUser())
             ->post(route('platform.systems.files.upload'), [
                 'files' => UploadedFile::fake()->image('avatar.jpg'),
             ]);
 
-        /** @var $upload \Orchid\Attachment\Models\Attachment */
+        /** @var $upload Attachment */
         $upload = $response->original;
 
         $response = $this
@@ -69,16 +70,16 @@ class AttachmentTest extends TestFeatureCase
         $response->assertOk();
     }
 
-    public function testAttachmentHttpGetFile()
+    public function testAttachmentHttpGetFile(): void
     {
-        /** @var $response \Illuminate\Foundation\Testing\TestResponse */
+        /** @var $response TestResponse */
         $response = $this
             ->actingAs($this->createAdminUser())
             ->post(route('platform.systems.files.upload'), [
                 'files' => UploadedFile::fake()->image('testAttachmentHttpGetFile.jpg'),
             ]);
 
-        /** @var $upload \Orchid\Attachment\Models\Attachment */
+        /** @var $upload Attachment */
         $upload = $response->original;
 
         $response = $this
@@ -96,16 +97,16 @@ class AttachmentTest extends TestFeatureCase
         */
     }
 
-    public function testAttachmentHttpUpdate()
+    public function testAttachmentHttpUpdate(): void
     {
-        /** @var $response \Illuminate\Foundation\Testing\TestResponse */
+        /** @var $response TestResponse */
         $response = $this
             ->actingAs($this->createAdminUser())
             ->post(route('platform.systems.files.upload'), [
                 'files' => UploadedFile::fake()->image('avatar.jpg'),
             ]);
 
-        /** @var $upload \Orchid\Attachment\Models\Attachment */
+        /** @var $upload Attachment */
         $upload = $response->original;
 
         $response = $this
@@ -125,7 +126,7 @@ class AttachmentTest extends TestFeatureCase
             ]);
     }
 
-    public function testAttachmentHttpSort()
+    public function testAttachmentHttpSort(): void
     {
         $response = $this
             ->actingAs($this->createAdminUser())

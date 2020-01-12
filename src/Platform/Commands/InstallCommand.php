@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Orchid\Platform\Commands;
 
 use Illuminate\Console\Command;
-use Orchid\Platform\Dashboard;
+use Illuminate\Console\DetectsApplicationNamespace;
 use Orchid\Platform\Events\InstallEvent;
 use Orchid\Platform\Providers\FoundationServiceProvider;
 use Orchid\Platform\Updates;
 
 class InstallCommand extends Command
 {
+    use DetectsApplicationNamespace;
+
     /**
      * The console command signature.
      *
@@ -55,9 +57,9 @@ class InstallCommand extends Command
                 ],
             ])
             ->executeCommand('migrate')
-            ->executeCommand('storage:link')
-            ->changeUserModel();
+            ->executeCommand('storage:link');
 
+        $this->registerOrchidServiceProvider();
         $this->info('Completed!');
 
         $this
@@ -93,22 +95,6 @@ class InstallCommand extends Command
         return $this;
     }
 
-    private function changeUserModel()
-    {
-        $this->info('Attempting to set ORCHID User model as parent to App\User');
-
-        if (! file_exists(app_path('User.php'))) {
-            $this->warn('Unable to locate "app/User.php".  Did you move this file?');
-            $this->warn('You will need to update this manually.');
-            $this->warn('Change "extends Authenticatable" to "extends \Orchid\Platform\Models\User" in your User model');
-
-            return;
-        }
-
-        $user = file_get_contents(Dashboard::path('install-stubs/User.stub'));
-        file_put_contents(app_path('User.php'), $user);
-    }
-
     /**
      * @param string $constant
      * @param string $value
@@ -133,10 +119,35 @@ class InstallCommand extends Command
      */
     private function fileGetContent(string $file)
     {
-        if (! is_file($file)) {
+        if (!is_file($file)) {
             return '';
         }
 
         return file_get_contents($file);
+    }
+
+    /**
+     * Register the Orchid service provider in the application configuration file.
+     *
+     * @return void
+     */
+    protected function registerOrchidServiceProvider()
+    {
+        /*
+        $namespace = Str::replaceLast('\\', '', $this->getAppNamespace());
+        $config = file_get_contents(config_path('app.php'));
+
+        if (Str::contains($config, "{$namespace}\Providers\OrchidServiceProvider::class")) {
+            return;
+        }
+
+        */
+        /*
+        file_put_contents(config_path('app.php'), str_replace(
+            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL,
+            "{$namespace}\\Providers\EventServiceProvider::class,".PHP_EOL."        {$namespace}\Providers\OrchidServiceProvider::class,".PHP_EOL,
+            $config
+        ));
+        */
     }
 }

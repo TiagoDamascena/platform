@@ -80,38 +80,4 @@ class ModalToggle extends Action
                 $this->set('action', $action.'/'.$method);
             });
     }
-
-    /**
-     * @deprecated
-     *
-     * @param string|int $slug
-     *
-     * @return ModalToggle
-     */
-    public function asyncParameter($slug): self
-    {
-        return $this->asyncParameters($slug);
-    }
-
-    /**
-     * Call the modal with async method.
-     * Options should contain values which handle by method.
-     *
-     * @deprecated It is necessary to form an asynchronous method manually
-     *
-     * @param string       $modal
-     * @param string       $method
-     * @param string|array $options
-     * @param string|null  $modalTitle
-     *
-     * @return ModalToggle
-     */
-    public function loadModalAsync(string $modal, string $method, $options = [], string $modalTitle = null): self
-    {
-        return $this
-            ->set('modal', $modal)
-            ->set('method', $method)
-            ->set('asyncParameters', Arr::wrap($options))
-            ->set('modalTitle', $modalTitle);
-    }
 }

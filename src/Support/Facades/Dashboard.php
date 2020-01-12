@@ -21,6 +21,9 @@ use Orchid\Platform\Dashboard as DashboardKernel;
  * @method static model(string $key, string $default = null)
  * @method static useModel(string $key, string $custom)
  * @method static bool checkUpdate()
+ * @method static string path(string $path = '')
+ *
+ *
  */
 class Dashboard extends Facade
 {

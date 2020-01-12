@@ -9,17 +9,17 @@ class AjaxRecord
     /**
      * @var null
      */
-    public $query = null;
+    public $query;
 
     /**
      * @var null
      */
-    public $key = null;
+    public $key;
 
     /**
      * @return array
      */
-    public function handler()
+    public function handler(): array
     {
         $data = [
             [

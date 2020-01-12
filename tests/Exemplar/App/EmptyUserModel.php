@@ -19,9 +19,9 @@ class EmptyUserModel extends Model
     protected $table = 'users';
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function scopeAsBuilder(Builder $query): Builder
     {
@@ -29,9 +29,9 @@ class EmptyUserModel extends Model
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function scopeAsCollection(Builder $query): Collection
     {
@@ -39,7 +39,7 @@ class EmptyUserModel extends Model
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
      * @return array
      */

@@ -11,7 +11,7 @@ use Orchid\Tests\TestUnitCase;
 
 class RowTest extends TestUnitCase
 {
-    public function testQueryVariables()
+    public function testQueryVariables(): void
     {
         $repository = new Repository([
             'name' => 'Alexandr Chernyaev',
@@ -24,19 +24,5 @@ class RowTest extends TestUnitCase
         $html = $layout->build($repository)->withErrors([])->render();
 
         $this->assertStringContainsString('Alexandr Chernyaev', $html);
-    }
-
-    /**
-     * @throws \Throwable
-     */
-    public function testWith()
-    {
-        $layout = Layout::rows([
-            Input::make('name'),
-        ])->with(10);
-
-        $html = $layout->build(new Repository())->withErrors([])->render();
-
-        $this->assertStringContainsString('10%', $html);
     }
 }

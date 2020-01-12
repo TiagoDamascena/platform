@@ -13,12 +13,12 @@ use Orchid\Tests\TestUnitCase;
  */
 class DashboardTest extends TestUnitCase
 {
-    public function testIsVersion()
+    public function testIsVersion(): void
     {
         $this->assertEquals(Dashboard::version(), Dashboard::VERSION);
     }
 
-    public function testIsModelDefault()
+    public function testIsModelDefault(): void
     {
         $class = Dashboard::modelClass('UnknownClass', User::class);
 
@@ -27,7 +27,7 @@ class DashboardTest extends TestUnitCase
         $this->assertEquals($class, $default);
     }
 
-    public function testIsModelCustomNotFound()
+    public function testIsModelCustomNotFound(): void
     {
         Dashboard::useModel(User::class, 'MyCustomClass');
 
@@ -36,7 +36,7 @@ class DashboardTest extends TestUnitCase
         $this->assertEquals($user, 'MyCustomClass');
     }
 
-    public function testIsModelConfigure()
+    public function testIsModelConfigure(): void
     {
         Dashboard::configure([
             'models' => [
@@ -45,14 +45,14 @@ class DashboardTest extends TestUnitCase
         ]);
 
         $class = Dashboard::model(User::class);
-        $option = Dashboard::option('models.'.User::class);
+        $option = Dashboard::option('models.' . User::class);
 
         $this->assertEquals($class, 'MyCustomClass');
         $this->assertEquals($option, 'MyCustomClass');
         $this->assertEquals(Dashboard::option('random'), null);
     }
 
-    public function testIsRegisterResource()
+    public function testIsRegisterResource(): void
     {
         $dashboard = new Dashboard();
 
@@ -103,7 +103,7 @@ class DashboardTest extends TestUnitCase
     /**
      * @param string $name
      */
-    public function testIsMacro($name = 'customMarcoName')
+    public function testIsMacro($name = 'customMarcoName'): void
     {
         Dashboard::macro('returnNameMacroFunction', function (string $test) {
             return $test;

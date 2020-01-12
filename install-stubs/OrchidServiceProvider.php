@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid;
+namespace App\Providers;
 
 use App\Orchid\Composers\MainMenuComposer;
 use App\Orchid\Composers\SystemMenuComposer;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 
-class PlatformProvider extends ServiceProvider
+class OrchidServiceProvider extends ServiceProvider
 {
     /**
      * Boot the application events.
@@ -38,5 +39,16 @@ class PlatformProvider extends ServiceProvider
         return ItemPermission::group(__('Systems'))
             ->addPermission('platform.systems.roles', __('Roles'))
             ->addPermission('platform.systems.users', __('Users'));
+    }
+
+    /**
+     *
+     */
+    public function register()
+    {
+        Route::domain((string)config('platform.domain'))
+            ->prefix(Dashboard::prefix('/'))
+            ->middleware(config('platform.middleware.private'))
+            ->group(base_path('routes/platform.php'));
     }
 }

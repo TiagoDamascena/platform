@@ -23999,7 +23999,9 @@ function (_Controller) {
       cropPanel.width = this.data.get('width');
       cropPanel.height = this.data.get('height');
       this.cropper = new cropperjs__WEBPACK_IMPORTED_MODULE_1___default.a(cropPanel, {
-        aspectRatio: this.data.get('width') / this.data.get('height')
+          viewMode: 2,
+          aspectRatio: this.data.get('width') / this.data.get('height'),
+          minContainerHeight: 500
       });
     }
     /**
@@ -24219,13 +24221,13 @@ function (_Flatpickr) {
      *
      */
     value: function initialize() {
-      var plugins = [];
+        var plugins = [];
 
-      if (this.data.get('range')) {
-          plugins.push(new flatpickr_dist_plugins_rangePlugin__WEBPACK_IMPORTED_MODULE_1___default.a({
-              input: this.data.get('range')
-          }));
-      }
+        if (this.data.get('range')) {
+            plugins.push(new flatpickr_dist_plugins_rangePlugin__WEBPACK_IMPORTED_MODULE_1___default.a({
+                input: this.data.get('range')
+            }));
+        }
 
         this.config = {
             locale: document.documentElement.lang,
@@ -24310,10 +24312,11 @@ function (_Controller) {
       }
 
       if (mask.removeMaskOnSubmit) {
-        this.element.closest('form').addEventListener('orchid:screen-submit', function () {
-          element.inputmask.remove();
-        });
-        mask.removeMaskOnSubmit = undefined;
+          var form = element.form || this.element.closest('form');
+          form.addEventListener('orchid:screen-submit', function () {
+              element.inputmask.remove();
+          });
+          mask.removeMaskOnSubmit = undefined;
       }
 
       inputmask__WEBPACK_IMPORTED_MODULE_1___default()(mask).mask(element);
@@ -25242,16 +25245,16 @@ function (_Controller) {
             allowClear: !select.hasAttribute('required'),
             ajax: {
                 type: 'POST',
-          cache: true,
-          delay: 250,
-          url: function url() {
-            return _this.data.get('route');
-          },
-          dataType: 'json',
-          processResults: function processResults(data) {
-            var selectValues = $(select).val();
-            selectValues = Array.isArray(selectValues) ? selectValues : [selectValues];
-            return {
+                cache: true,
+                delay: 250,
+                url: function url() {
+                    return _this.data.get('route');
+                },
+                dataType: 'json',
+                processResults: function processResults(data) {
+                    var selectValues = $(select).val();
+                    selectValues = Array.isArray(selectValues) ? selectValues : [selectValues];
+                    return {
               results: Object.keys(data).reduce(function (res, id) {
                 if (selectValues.includes(id.toString())) {
                   return res;
@@ -26873,9 +26876,9 @@ function (_Controller) {
   }, {
     key: "stopProgressBar",
     value: function stopProgressBar() {
-      if (!turbolinks__WEBPACK_IMPORTED_MODULE_1___default.a.supported) {
-        return;
-      }
+        if (!turbolinks__WEBPACK_IMPORTED_MODULE_1___default.a.supported) {
+            return;
+        }
 
         turbolinks__WEBPACK_IMPORTED_MODULE_1___default.a.controller.adapter.progressBar.hide();
         turbolinks__WEBPACK_IMPORTED_MODULE_1___default.a.controller.adapter.progressBar.setValue(100);
@@ -27318,9 +27321,19 @@ function (_Controller) {
             return Constructor;
         }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+        function _possibleConstructorReturn(self, call) {
+            if (call && (_typeof(call) === "object" || typeof call === "function")) {
+                return call;
+            }
+            return _assertThisInitialized(self);
+        }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+        function _assertThisInitialized(self) {
+            if (self === void 0) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+            return self;
+        }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -27951,9 +27964,19 @@ function (_Controller) {
             return Constructor;
         }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+        function _possibleConstructorReturn(self, call) {
+            if (call && (_typeof(call) === "object" || typeof call === "function")) {
+                return call;
+            }
+            return _assertThisInitialized(self);
+        }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+        function _assertThisInitialized(self) {
+            if (self === void 0) {
+                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            }
+            return self;
+        }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -28159,8 +28182,10 @@ function (_Controller) {
      * @param event
      */
     value: function submit(event) {
-      this.setAllFilter();
-      event.preventDefault();
+        var screenEventSubmit = new Event('orchid:screen-submit');
+        event.target.dispatchEvent(screenEventSubmit);
+        this.setAllFilter();
+        event.preventDefault();
     }
   }, {
     key: "onFilterClick",

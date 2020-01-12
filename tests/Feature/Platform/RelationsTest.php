@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Crypt;
 use Orchid\Platform\Models\User;
 use Orchid\Tests\Exemplar\App\EmptyUserModel;
 use Orchid\Tests\TestFeatureCase;
+use Throwable;
 
 class RelationsTest extends TestFeatureCase
 {
@@ -42,9 +43,9 @@ class RelationsTest extends TestFeatureCase
      *
      * @dataProvider scopeList
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function testScopeModel(string $scope)
+    public function testScopeModel(string $scope): void
     {
         $response = $this->getScope($scope);
         $json = $this->users->pluck('email', 'id')->toArray();
@@ -57,16 +58,16 @@ class RelationsTest extends TestFeatureCase
      *
      * @dataProvider scopeList
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function testAppendModel(string $scope)
+    public function testAppendModel(string $scope): void
     {
         $response = $this->getScope($scope, 'full');
 
         $users = collect();
 
         $this->users->each(function (User $user) use ($users) {
-            $users->put($user->id, $user->name.' ('.$user->email.')');
+            $users->put($user->id, $user->name . ' (' . $user->email . ')');
         });
 
         $json = $users->toArray();

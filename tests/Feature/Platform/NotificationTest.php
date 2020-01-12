@@ -9,7 +9,7 @@ use Orchid\Tests\TestFeatureCase;
 
 class NotificationTest extends TestFeatureCase
 {
-    public function testViewNotification()
+    public function testViewNotification(): void
     {
         $this->createNotification('Hello Test');
 
@@ -49,7 +49,7 @@ class NotificationTest extends TestFeatureCase
     /**
      * @param string $title
      */
-    private function createNotification($title = 'test')
+    private function createNotification($title = 'test'): void
     {
         $this->createAdminUser()->notify(new DashboardNotification([
             'title'   => $title,
