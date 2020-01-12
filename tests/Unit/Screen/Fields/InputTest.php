@@ -55,6 +55,6 @@ class InputTest extends TestFieldsUnitCase
         $input = Input::make('name')
             ->title('What is your name?');
 
-        $this->assertStringContainsString('What is your name?', (string)$input);
+        $this->assertStringContainsString('What is your name?', (string) $input);
     }
 }

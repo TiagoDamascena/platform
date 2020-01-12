@@ -41,12 +41,9 @@ class OrchidServiceProvider extends ServiceProvider
             ->addPermission('platform.systems.users', __('Users'));
     }
 
-    /**
-     *
-     */
     public function register()
     {
-        Route::domain((string)config('platform.domain'))
+        Route::domain((string) config('platform.domain'))
             ->prefix(Dashboard::prefix('/'))
             ->middleware(config('platform.middleware.private'))
             ->group(base_path('routes/platform.php'));

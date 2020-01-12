@@ -50,7 +50,6 @@ class PlatformServiceProvider extends ServiceProvider
         }
     }
 
-
     /**
      * @return ItemPermission
      */

@@ -240,10 +240,10 @@ class FoundationServiceProvider extends ServiceProvider
             return new Dashboard();
         });
 
-        if (!Route::hasMacro('screen')) {
+        if (! Route::hasMacro('screen')) {
             Route::macro('screen', function ($url, $screen, $name = null) {
                 /* @var Router $this */
-                return $this->any($url . '/{method?}/{argument?}', [$screen, 'handle'])
+                return $this->any($url.'/{method?}/{argument?}', [$screen, 'handle'])
                     ->name($name);
             });
         }

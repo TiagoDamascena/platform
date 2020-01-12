@@ -67,7 +67,7 @@ class RelationsTest extends TestFeatureCase
         $users = collect();
 
         $this->users->each(function (User $user) use ($users) {
-            $users->put($user->id, $user->name . ' (' . $user->email . ')');
+            $users->put($user->id, $user->name.' ('.$user->email.')');
         });
 
         $json = $users->toArray();

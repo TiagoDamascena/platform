@@ -119,7 +119,7 @@ class InstallCommand extends Command
      */
     private function fileGetContent(string $file)
     {
-        if (!is_file($file)) {
+        if (! is_file($file)) {
             return '';
         }
 

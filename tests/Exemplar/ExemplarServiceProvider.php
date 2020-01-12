@@ -35,12 +35,9 @@ class ExemplarServiceProvider extends ServiceProvider
         ]);
     }
 
-    /**
-     *
-     */
     public function register()
     {
-        Route::domain((string)config('platform.domain'))
+        Route::domain((string) config('platform.domain'))
             ->prefix(Dashboard::prefix('/'))
             ->middleware(config('platform.middleware.private'))
             ->group(base_path('routes/platform.php'));

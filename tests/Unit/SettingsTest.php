@@ -21,8 +21,8 @@ class SettingsTest extends TestUnitCase
     public function testForOneValue(): void
     {
         //Запишем значение
-        $key = 'test-' . Str::random(40);
-        $value = 'value-' . Str::random(40);
+        $key = 'test-'.Str::random(40);
+        $value = 'value-'.Str::random(40);
 
         $this->setting->set($key, $value);
 
@@ -42,9 +42,9 @@ class SettingsTest extends TestUnitCase
     public function testForManyValue(): void
     {
         $valueArray = [
-            'test-1' => 'value-' . Str::random(40),
-            'test-2' => 'value-' . Str::random(40),
-            'test-3' => 'value-' . Str::random(40),
+            'test-1' => 'value-'.Str::random(40),
+            'test-2' => 'value-'.Str::random(40),
+            'test-3' => 'value-'.Str::random(40),
         ];
 
         //Добавим несколько значений

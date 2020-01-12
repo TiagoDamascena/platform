@@ -45,7 +45,7 @@ class DashboardTest extends TestUnitCase
         ]);
 
         $class = Dashboard::model(User::class);
-        $option = Dashboard::option('models.' . User::class);
+        $option = Dashboard::option('models.'.User::class);
 
         $this->assertEquals($class, 'MyCustomClass');
         $this->assertEquals($option, 'MyCustomClass');
